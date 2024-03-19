@@ -24,14 +24,18 @@ VALIDATE $? "Enabled nodejs" "Unsuccessfull"
 
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "Installed nodejs"
-
-useradd roboshop &>> $LOGFILE
-VALIDATE $? "Created roboshop account Locally"
-
+id roboshop #if roboshop user does not exist, then it is failure
+if [ $? -ne 0 ]
+then
+useradd roboshop
+VALIDATE $? "roboshop user creation"
+else
+echo -e "roboshop user already exist $Y SKIPPING $N"
+fi
 id roboshop
 VALIDATE $? "Checking if roboshop id is created successfully or not"
 
-mkdir /app &>> LOGFILE
+mkdir -p /app &>> LOGFILE
 VALIDATE $? "Created app folder"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
@@ -40,8 +44,8 @@ VALIDATE $? "Downloaded catalogue.zip folder from S3"
 cd /app &>> $LOGFILE
 VALIDATE $? "Changed directory to /app"
 
-unzip /tmp/catalogue.zip &>> $LOGFILE
-VALIDATE $? "unzip success"
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
+VALIDATE $? "unzip catalogue.zp file"
 
 npm install &>> $LOGFILE
 VALIDATE $? "Installed dependencies"
