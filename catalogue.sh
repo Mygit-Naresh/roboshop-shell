@@ -15,6 +15,7 @@ validate(){
 if [ $1 -ne 0 ]
 then echo -e "$R $3 $N"
 else echo -e  "$G $2 $N"
+fi
 }
 dnf module disable nodejs -y &>> LOGFILE
 VALDIATE $? "Disabled nodejs" "Unsuccessfull"
