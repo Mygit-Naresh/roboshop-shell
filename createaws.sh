@@ -11,13 +11,26 @@ aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type t2.micro 
 fi
 echo "$INSTANCE created in aws successfully"
 IPADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type t2.micro --security-group-ids sg-09806393e77f11a3e --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value="$INSTANCE"}]" --query 'Instances[0].PrivateIpAddress' --output text)
-# CreateDNSRecord.yaml
-CHANGE_BATCH=(Changes: - Action: CREATE ResourceRecordSet: Name: $INSTANCE.eternaltrainings.online Type: A TTL: 10 ResourceRecords: - Value: $IPADDRESS)
+echo "$INSTANCE = $IPADDRESS"
 
 aws route53 change-resource-record-sets \
 --hosted-zone-id YOUR_HOSTED_ZONE_ID \
---change-batch "$($CHANGE_BATCH)"
-
+--change-batch '
+    {
+        "Comment": "Creating a record set for roboshop projetc and domain eternaltraings.line"
+        ,"Changes": [{
+        "Action"              : "UPSERT"
+        ,"ResourceRecordSet"  : {
+            "Name"              : "'$INSTANCE'.eternaltrainings.online"
+            ,"Type"             : "A"
+            ,"TTL"              : 1
+            ,"ResourceRecords"  : [{
+                "Value"         : "'$IPADDRESS'"
+            }]
+        }
+        }]
+    }
+        '
 
 done
 
