@@ -1,0 +1,9 @@
+# create_dns_record.yaml
+Changes:
+  - Action: CREATE
+    ResourceRecordSet:
+      Name: test.eternaltrainings.online
+      Type: A
+      TTL: 10
+      ResourceRecords:
+        - Value: 172.20.10.20
