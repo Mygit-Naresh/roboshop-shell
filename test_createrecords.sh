@@ -1,4 +1,4 @@
-# create_dns_record.yaml
+create_dns_record.yaml="
 Changes:
   - Action: CREATE
     ResourceRecordSet:
@@ -7,6 +7,7 @@ Changes:
       TTL: 10
       ResourceRecords:
         - Value: 172.2.20.10
+        "
 
 #!/bin/bash
 
