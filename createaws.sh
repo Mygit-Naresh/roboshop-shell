@@ -35,9 +35,8 @@ aws route53 change-resource-record-sets \
         }]
     }
      '
-else
 
-echo "Record created for $INSTANCE and Ip is $IP_ADDRESS"
+echo "Record created for $INSTANCE and IP is $IP_ADDRESS"
 
 done
 
