@@ -35,24 +35,8 @@ aws route53 change-resource-record-sets \
     }
      '
 else
-aws route53 change-resource-record-sets \
---hosted-zone-id Z101265833JA5X90XBKK8 \
-  --change-batch '
-    {
-        "Comment": "Creating a record set for cognito endpoint"
-        ,"Changes": [{
-        "Action"              : "UPSERT"
-        ,"ResourceRecordSet"  : {
-            "Name"              : "'$INSTANCE'.eternaltrainings.online"
-            ,"Type"             : "A"
-            ,"TTL"              : 1
-            ,"ResourceRecords"  : [{
-                "Value"         : "'$T2_IPADDRESS'"
-            }]
-        }
-        }]
-    }
-        '
-fi
+
+echo "completed"
+
 done
 
