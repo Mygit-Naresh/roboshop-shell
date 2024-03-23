@@ -33,8 +33,7 @@ aws route53 change-resource-record-sets \
         }
         }]
     }
-        '
-
+     '
 else
 aws route53 change-resource-record-sets \
 --hosted-zone-id Z101265833JA5X90XBKK8 \
@@ -54,7 +53,6 @@ aws route53 change-resource-record-sets \
         }]
     }
         '
-
 fi
 done
 
