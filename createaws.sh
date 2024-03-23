@@ -37,9 +37,9 @@ aws route53 change-resource-record-sets \
 else
 aws route53 change-resource-record-sets \
 --hosted-zone-id Z101265833JA5X90XBKK8 \
---change-batch '
+  --change-batch '
     {
-        "Comment": "Creating a record set for roboshop projetc and domain eternaltraings.line"
+        "Comment": "Creating a record set for cognito endpoint"
         ,"Changes": [{
         "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
