@@ -8,13 +8,14 @@ do
 echo -e "Creating $INSTANCE"
 if [ $INSTANCE = "mongodb" ] || [ $INSTANCE = "redis" ] || [ $INSTANCE = "shipping" ]
 then
-T3_IPADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $T3_INSTANCE_TYPE --security-group-ids sg-09806393e77f11a3e --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value="$INSTANCE"}]" --query 'Instances[0].PrivateIpAddress' --output text)
+    INSTANCE_TYPE="t3.small"
 else
-T2_IPADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $T2_INSTANCE_TYPE --security-group-ids sg-09806393e77f11a3e --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value="$INSTANCE"}]" --query 'Instances[0].PrivateIpAddress' --output text)
+    INSTANCE_TYPE="t2.micro"
 fi
 
+IP_ADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCE_TYPE  --security-group-ids sg-09806393e77f11a3e --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value="$INSTANCE"}]" --query 'Instances[0].PrivateIpAddress' --output text)
 
-if [ $T3_INSTANCE_TYPE = $T3_IPADDRESS  ] then
+echo -e "$INSTANCE = $IP_ADDRESS"
 
 aws route53 change-resource-record-sets \
 --hosted-zone-id Z101265833JA5X90XBKK8 \
@@ -28,7 +29,7 @@ aws route53 change-resource-record-sets \
             ,"Type"             : "A"
             ,"TTL"              : 1
             ,"ResourceRecords"  : [{
-                "Value"         : "'$T3_IPADDRESS'"
+                "Value"         : "'$IP_ADDRESS'"
             }]
         }
         }]
@@ -36,7 +37,7 @@ aws route53 change-resource-record-sets \
      '
 else
 
-echo "completed"
+echo "Record created for $INSTANCE and Ip is $IP_ADDRESS"
 
 done
 
