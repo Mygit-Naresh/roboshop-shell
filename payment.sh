@@ -34,7 +34,7 @@ unzip /tmp/payment.zip &>> $LOGFILE
 VALIDATE "$?" "unzip payment.zip"
 pip3.6 install -r requirements.txt &>> $LOGFILE
 VALIDATE "$?" "python dependencies installed"
-cp root/roboshop-shell/payment.service  /etc/systemd/system/payment.service &>> $LOGFILE
+cp /root/roboshop-shell/payment.service  /etc/systemd/system/payment.service &>> $LOGFILE
 VALIDATE "$?" "copied payment.service to etc"
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE "$?" "daemon reloading"
