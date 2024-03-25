@@ -14,9 +14,9 @@ fi
 VALIDATE(){
 if [ $1 -eq 0 ]
 then
-echo "$G $2 $N"
+echo -e "$G $2 $N"
 else
-echo "$R Please check there is some issues $N"
+echo -e "$R Please check there is some issues $N"
 exit 1
 fi
 }
@@ -36,7 +36,7 @@ unzip /tmp/shipping.zip &>> $LOGFILE
 VALIDATE $? "unzipped builds"
 mvn clean package &>> $LOGFILE
 VALIDATE $? "java package is ready"
-mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
+mv /app/target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 VALIDATE $? "renamed .jar folder tp shipping.jar"
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? "daemon reloaded"
