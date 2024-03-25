@@ -34,7 +34,7 @@ cd /usr/share/nginx/html &>> $LOGFILE
 VALIDATE $? "change directory to /usr/share/nginx/html"
 unzip /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "unzip web content"
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf  &>> $LOGFILE
+cp /root/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf  &>> $LOGFILE
 VALIDATE $? "copied roboshop.conf file to /etc"
 systemctl restart nginx  &>> $LOGFILE
 VALIDATE $? "nginx restarted"
