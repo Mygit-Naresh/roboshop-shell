@@ -18,8 +18,8 @@ echo "$G $2 $N"
 else
 echo "$R Please check there is some issues $N"
 exit 1
+fi
 }
-
 dnf install python36 gcc python3-devel -y
 VALIDATE "$?" "install pytho36"
 if [ $ID -eq 0]

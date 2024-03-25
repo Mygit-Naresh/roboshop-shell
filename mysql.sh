@@ -14,7 +14,7 @@ fi
 VALIDATE(){
 if [ $1 -eq 0 ]
 then
-echo "$G $2 $N"
+echo -e "$G $2 $N"
 else
 echo -e "$R Please check there is some issues $N"
 exit 1
