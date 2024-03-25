@@ -26,9 +26,9 @@ dnf module enable redis:remi-6.2 -y &>> $LOGFILE
 VALIDATE $? "Enable module 6.2 redis" &>> $LOGFILE
 dnf install redis -y &>> $LOGFILE
 VALIDATE $? "install redis"
-sed -i /s/127.0.0.1/0.0.0.0/g  /etc/redis.conf &>> $LOGFILE
+sed -i 's/127.0.0.1/0.0.0.0/g'  /etc/redis.conf &>> $LOGFILE
 VALIDATE $? "Local IP replaced with 0.0.0.0 in /etc/redis.conf"
-sed -i /s/127.0.0.1/0.0.0.0/g  /etc/redis/redis.conf &>> $LOGFILE
+sed -i 's/127.0.0.1/0.0.0.0/g'  /etc/redis/redis.conf &>> $LOGFILE
 VALIDATE $? "Local IP replaced with 0.0.0.0 in /etc/redis/redis.conf"
 
 systemctl enable redis &>> $LOGFILE
