@@ -1,6 +1,11 @@
 #!/bin/bash
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 INSTANCES=("mongodb" "redis" "rabbitMQ" "mysql" "user" "catalogue" "payment" "shipping" "web")
-HOSTEDZONE="Z101265833JA5X90XBKK8"
+HOSTED_ZONE="Z101265833JA5X90XBKK8"
+DOMAIN_NAME="eternaltrainings.online"
 T2_INSTANCE_TYPE="t2.micro"
 T3_INSTANCE_TYPE="t3.small"
 for INSTANCE  in "${INSTANCES[@]}"
@@ -18,14 +23,14 @@ IP_ADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-t
 echo -e "$INSTANCE = $IP_ADDRESS"
 
 aws route53 change-resource-record-sets \
---hosted-zone-id Z101265833JA5X90XBKK8 \
+--hosted-zone-id $HOSTED_ZONE \
 --change-batch '
     {
         "Comment": "Creating a record set for roboshop projetc and domain eternaltraings.line"
         ,"Changes": [{
         "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
-            "Name"              : "'$INSTANCE'.eternaltrainings.online"
+            "Name"              : "'$INSTANCE.$DOMAIN_NAME'"
             ,"Type"             : "A"
             ,"TTL"              : 1
             ,"ResourceRecords"  : [{
@@ -36,7 +41,7 @@ aws route53 change-resource-record-sets \
     }
      '
 
-echo "Record created for $INSTANCE and IP is $IP_ADDRESS"
+echo -e "$G DNS Record in R53 created for $INSTANCE and IP and host is $IP_ADDRESS and $INSTANCE.$DOMAIN_NAME $N"
 
 done
 
