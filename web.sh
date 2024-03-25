@@ -30,14 +30,12 @@ rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 VALIDATE $? "removed default content in html" 
 curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
 VALIDATE $? "downloaded web content in zip"
-
+cd /usr/share/nginx/html &>> $LOGFILE
+VALIDATE $? "change directory to /usr/share/nginx/html"
 unzip /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "unzip web content"
 cp roboshop.conf /etc/nginx/default.d/roboshop.conf  &>> $LOGFILE
 VALIDATE $? "copied roboshop.conf file to /etc"
-
-cd /usr/share/nginx/html &>> $LOGFILE
-VALIDATE $? "change directory to /usr/share/nginx/html"
 systemctl restart nginx  &>> $LOGFILE
 VALIDATE $? "nginx restarted"
 systemctl status nginx
