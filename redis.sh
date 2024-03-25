@@ -21,7 +21,7 @@ fi
 }
 
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>> $LOGFILE
-VALIDATE $? "installed redis"
+VALIDATE $? "installed remi repo .rpm file from internet"
 dnf module enable redis:remi-6.2 -y &>> $LOGFILE
 VALIDATE $? "Enable module 6.2 redis" &>> $LOGFILE
 dnf install redis -y &>> $LOGFILE
