@@ -17,6 +17,7 @@ echo -e "$G $2 $N"
 else
 echo -e "$R Please check there is some issues $N"
 exit 1
+fi
 }
 
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>> $LOGFILE

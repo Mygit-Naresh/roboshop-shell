@@ -18,6 +18,7 @@ echo "$G $2 $N"
 else
 echo -e "$R Please check there is some issues $N"
 exit 1
+fi
 }
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 VALIDATE $?  "download .rmp package from erlang "

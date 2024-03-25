@@ -18,6 +18,7 @@ echo -e "$G $2 $N"
 else
 echo -e "$R Please check there is some issues $N"
 exit 1
+fi
 }
 dnf install nginx -y &>> $LOGFILE
 VALIDATE $? "nginx installed"

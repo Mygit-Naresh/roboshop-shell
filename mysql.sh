@@ -18,6 +18,7 @@ echo "$G $2 $N"
 else
 echo -e "$R Please check there is some issues $N"
 exit 1
+fi
 }
 dnf module disable mysql -y &>> $LOGFILE
 VALIDATE $? "disabled mysql module"

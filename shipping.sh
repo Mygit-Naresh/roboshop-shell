@@ -18,6 +18,7 @@ echo "$G $2 $N"
 else
 echo "$R Please check there is some issues $N"
 exit 1
+fi
 }
 dnf install maven -y &>> $LOGFILE
 VALIDATE $? "maven installed"
