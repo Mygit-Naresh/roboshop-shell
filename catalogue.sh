@@ -36,19 +36,19 @@ id roboshop
 VALIDATE $? "Checking if roboshop id is created successfully or not"
 if [ -d /app ]
 then rm -rf /app
-else
-mkdir -p /app &>> LOGFILE
 fi
+mkdir -p /app &>> LOGFILE
 VALIDATE $? "Created app folder"
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+VALIDATE $? "download catalogue.zip in /tmp/catalogue folder"
 cd /app &>> $LOGFILE
 VALIDATE $? "Changed directory to /app"
 unzip -o /tmp/catalogue.zip &>> $LOGFILE
+VALIDATE $? "unzip catalogue.zip files in /tmp"
 npm install &>> $LOGFILE
 VALIDATE $? "Installed dependencies"
 cp /root/roboshop-shell/catalogue.service  /etc/systemd/system/catalogue.service &>> $LOGFILE
 VALIDATE $? "Copied catalogue.service to /etc/systemd/system/catalogue.service"
-
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? "daemon reloaded"
 systemctl enable catalogue &>> $LOGFILE
