@@ -37,7 +37,8 @@ VALIDATE $? "unzipped builds"
 mvn clean package &>> $LOGFILE
 VALIDATE $? "java package is ready"
 mv /app/target/shipping-1.0.jar shipping.jar &>> $LOGFILE
-VALIDATE $? "renamed .jar folder tp shipping.jar"
+VALIDATE $? "renamed .jar folder t0 shipping.jar"
+cp /root//root/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? "daemon reloaded"
 systemctl enable shipping &>> $LOGFILE
