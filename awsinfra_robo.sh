@@ -3,7 +3,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-INSTANCES=("mongodb" "redis" "rabbitMQ" "mysql" "user" "catalogue" "payment" "shipping" "cart" "web")
+#INSTANCES=("mongodb" "redis" "rabbitMQ" "mysql" "user" "catalogue" "payment" "shipping" "cart" "web")
+INSTANCES=("mongodb" "catalogue" "web")
 HOSTED_ZONE="Z101265833JA5X90XBKK8"
 DOMAIN_NAME="eternaltrainings.online"
 T2_INSTANCE_TYPE="t2.micro"
@@ -26,7 +27,7 @@ aws route53 change-resource-record-sets \
 --hosted-zone-id $HOSTED_ZONE \
 --change-batch '
     {
-        "Comment": "Creating a record set for roboshop projetc and domain eternaltraings.line"
+        "Comment": "Creating a record set for roboshop project infra"
         ,"Changes": [{
         "Action"              : "UPSERT"
         ,"ResourceRecordSet"  : {
@@ -44,4 +45,3 @@ aws route53 change-resource-record-sets \
 echo -e "$G DNS Record in R53 created for $INSTANCE and IP and host is $IP_ADDRESS and $INSTANCE.$DOMAIN_NAME $N"
 
 done
-
