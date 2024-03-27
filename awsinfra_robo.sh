@@ -3,8 +3,10 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-#INSTANCES=("mongodb" "redis" "rabbitMQ" "mysql" "user" "catalogue" "payment" "shipping" "cart" "web")
-INSTANCES=("mongodb" "catalogue" "web")
+INSTANCES=("mongodb" "redis" "rabbitmq" "mysql" "user" "catalogue" "payment" "shipping" "cart" "web")
+#INSTANCES=("mongodb" "catalogue" "web")
+AMI="ami-0f3c7d07486cad139"
+SECURITY_GROUP="sg-09806393e77f11a3e"
 HOSTED_ZONE="Z101265833JA5X90XBKK8"
 DOMAIN_NAME="eternaltrainings.online"
 T2_INSTANCE_TYPE="t2.micro"
@@ -19,7 +21,7 @@ else
     INSTANCE_TYPE="t2.micro"
 fi
 
-IP_ADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCE_TYPE  --security-group-ids sg-09806393e77f11a3e --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value="$INSTANCE"}]" --query 'Instances[0].PrivateIpAddress' --output text)
+IP_ADDRESS=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE  --security-group-ids $SECURITY_GROUP --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value="$INSTANCE"}]" --query 'Instances[0].PrivateIpAddress' --output text)
 
 echo -e "$INSTANCE = $IP_ADDRESS"
 
